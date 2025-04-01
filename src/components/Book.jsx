@@ -65,6 +65,7 @@ const Page = ({number, front, back, ...props}) => {
         bones[i - 1].add(bone); // attach the new bone to the previous bone
       }
     }
+    const skeleton = new Skeleton(bones);
 
 
   }, []);
