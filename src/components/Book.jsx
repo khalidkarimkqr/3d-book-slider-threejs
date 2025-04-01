@@ -94,7 +94,7 @@ pages.forEach((page) => {
 
 
 
-const Page = ({number, front, back,page, ...props}) => {
+const Page = ({number, front, back,page, opened, ...props}) => {
     const [picture, picture2, pictureRoughness] = useTexture([
         `/textures/${front}.jpg`,
         `/textures/${back}.jpg`,
@@ -174,6 +174,7 @@ const Page = ({number, front, back,page, ...props}) => {
         if (!skinnedMeshRef.current) {
           return;
         }
+        let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
         const bones = skinnedMeshRef.current.skeleton.bones;
 
     });
@@ -199,6 +200,7 @@ export const Book = ({ ...props }) => {
               key={index} 
               page = {page}
               number={index} 
+              opened={page > index}
               {...pageData} 
             />
         )}
