@@ -205,7 +205,7 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
             insideCurveStrength * insideCurveIntensity * targetRotation -
             outsideCurveStrength * outsideCurveIntensity * targetRotation +
             turningCurveStrength * turningIntensity * targetRotation;
-           
+            let foldRotationAngle = degToRad(Math.sign(targetRotation) * 2);
 
             if (bookClosed) {
                 if (i === 0) {
