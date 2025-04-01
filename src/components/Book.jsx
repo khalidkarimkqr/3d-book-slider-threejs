@@ -63,6 +63,21 @@ for (let i = 0; i < position.count; i++) {
     new Float32BufferAttribute(skinWeights, 4)
   );
 
+  const pageMaterials = [
+    new MeshStandardMaterial({
+      color: whiteColor,
+    }),
+    new MeshStandardMaterial({
+      color: "#111",
+    }),
+    new MeshStandardMaterial({
+      color: whiteColor,
+    }),
+    new MeshStandardMaterial({
+      color: whiteColor,
+    }),
+  ];
+
 
 
 const Page = ({number, front, back, ...props}) => {
