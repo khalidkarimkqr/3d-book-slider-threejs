@@ -182,6 +182,12 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
           return;
         }
         const emissiveIntensity = highlighted ? 0.22 : 0;
+        skinnedMeshRef.current.material[4].emissiveIntensity =
+            skinnedMeshRef.current.material[5].emissiveIntensity = MathUtils.lerp(
+                skinnedMeshRef.current.material[4].emissiveIntensity,
+                emissiveIntensity,
+                0.1
+      );
 
         if (lastOpened.current !== opened) {
             turnedAt.current = +new Date();
