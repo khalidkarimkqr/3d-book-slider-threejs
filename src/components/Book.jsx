@@ -13,7 +13,8 @@ const pageGeometry = new BoxGeometry(
     PAGE_WIDTH,
     PAGE_HEIGHT,
     PAGE_DEPTH,
-    PAGE_SEGMENTS
+    PAGE_SEGMENTS,
+    2
 );
 
 const Page = ({number, front, back, ...props}) => {
