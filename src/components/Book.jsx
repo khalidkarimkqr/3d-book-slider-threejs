@@ -1,8 +1,10 @@
-import {pages} from "./UI"
+import {pages} from "./UI";
+import {useRef} from "react";
 
 const Page = ({number, front, back, ...props}) => {
+  const group = useRef();
   return (
-    <group {...props}>
+    <group {...props} ref ={group}>
       <mesh scale = {0.1}>
         <boxGeometry />
         <meshBasicMaterial color= "red"/>
