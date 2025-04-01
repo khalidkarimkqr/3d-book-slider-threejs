@@ -23,6 +23,7 @@ import { pageAtom, pages } from "./UI";
 
 
 const easingFactor = 0.5; //controls the speed of the easing
+const easingFactorFold = 0.3; // Controls the speed of the easing
 const insideCurveStrength = 0.18; // Controls the strength of the curve
 const outsideCurveStrength = 0.05; // Controls the strength of the curve
 const turningCurveStrength = 0.09; // Controls the strength of the curve
@@ -217,6 +218,18 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
                 }
               }
             easing.dampAngle(target.rotation,"y",rotationAngle, easingFactor, delta)
+              
+            const foldIntensity =
+            i > 8
+              ? Math.sin(i * Math.PI * (1 / bones.length) - 0.5) * turningTime
+              : 0;
+          easing.dampAngle(
+            target.rotation,
+            "x",
+            foldRotationAngle * foldIntensity,
+            easingFactorFold,
+            delta
+          ); 
         }
     });
 
