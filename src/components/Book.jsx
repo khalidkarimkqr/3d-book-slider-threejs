@@ -22,7 +22,10 @@ import { useHelper } from '@react-three/drei';
 import { pageAtom, pages } from "./UI";
 
 
-const lerpFactor = 0.05;
+const easingFactor = 0.5; //controls the speed of the easing
+const insideCurveStrength = 0.18; // Controls the strength of the curve
+const outsideCurveStrength = 0.05; // Controls the strength of the curve
+const turningCurveStrength = 0.09; // Controls the strength of the curve
 
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.71; // 4:3 aspect ratio
@@ -107,6 +110,7 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
       picture.colorSpace = picture2.colorSpace = SRGBColorSpace;
 
     const group = useRef();
+    const turnedAt = useRef(0);
     const skinnedMeshRef = useRef();
   
     const manualSkinnedMesh = useMemo(() => {
@@ -172,17 +176,42 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
     // Add SkeletonHelper to visualize bones
     // useHelper(skinnedMeshRef, SkeletonHelper, "red");
 
-    useFrame(() => {
+    useFrame((_, delta) => {
         if (!skinnedMeshRef.current) {
           return;
         }
+        let turningTime = Math.min(400, new Date() - turnedAt.current) / 400;
+        turningTime = Math.sin(turningTime * Math.PI);
+
+
         let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
         if (!bookClosed) {
             targetRotation += degToRad(number * 0.8);
           }
         const bones = skinnedMeshRef.current.skeleton.bones;
-        bones[0].rotation.y = MathUtils.lerp(bones[0].rotation.y,targetRotation, lerpFactor)
+        for (let i = 0; i < bones.length; i++) {
+            const target = i === 0 ? group.current : bones[i];
+            const insideCurveIntensity = i < 8 ? Math.sin(i * 0.2 + 0.25) : 0;
+            const outsideCurveIntensity = i >= 8 ? Math.cos(i * 0.3 + 0.09) : 0;
+            const turningIntensity =
+                Math.sin(i * Math.PI * (1 / bones.length)) * turningTime;
+            let rotationAngle =
+            insideCurveStrength * insideCurveIntensity * targetRotation -
+            outsideCurveStrength * outsideCurveIntensity * targetRotation +
+            turningCurveStrength * turningIntensity * targetRotation;
+           
 
+            if (bookClosed) {
+                if (i === 0) {
+                  rotationAngle = targetRotation;
+                  foldRotationAngle = 0;
+                } else {
+                  rotationAngle = 0;
+                  foldRotationAngle = 0;
+                }
+              }
+            easing.dampAngle(target.rotation,"y",rotationAngle, easingFactor, delta)
+        }
     });
 
 
