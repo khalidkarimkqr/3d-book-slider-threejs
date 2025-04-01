@@ -26,7 +26,7 @@ import { pages } from "./UI";
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.71; // 4:3 aspect ratio
 const PAGE_DEPTH = 0.003;
-const PAGE_SEGMENTS = 5;
+const PAGE_SEGMENTS = 30;
 const SEGMENT_WIDTH = PAGE_WIDTH / PAGE_SEGMENTS;
 
 const pageGeometry = new BoxGeometry(
@@ -84,12 +84,7 @@ const pageMaterials = [
     new MeshStandardMaterial({
         color: whiteColor,
     }),
-    new MeshStandardMaterial({
-        color: "pink",
-    }),
-    new MeshStandardMaterial({
-        color: "blue",
-    }),
+    
 ];
 
 
@@ -113,7 +108,24 @@ const Page = ({number, front, back, ...props}) => {
         }
       }
       const skeleton = new Skeleton(bones);
-      const materials = pageMaterials
+
+
+      const materials = [
+        ...pageMaterials,
+        new MeshStandardMaterial({
+          color: whiteColor,
+          map: picture,
+          ...(number === 0
+            ? {
+                roughnessMap: pictureRoughness,
+              }
+            : {
+                roughness: 0.1,
+              }),
+          emissive: emissiveColor,
+          emissiveIntensity: 0,
+        }),
+      ];
       const mesh = new SkinnedMesh(pageGeometry, materials);
   
       mesh.castShadow = true;
@@ -129,7 +141,7 @@ const Page = ({number, front, back, ...props}) => {
     }, []);
   
     // Add SkeletonHelper to visualize bones
-    useHelper(skinnedMeshRef, SkeletonHelper, "red");
+    // useHelper(skinnedMeshRef, SkeletonHelper, "red");
 
     useFrame(() => {
         if (!skinnedMeshRef.current) {
@@ -137,7 +149,6 @@ const Page = ({number, front, back, ...props}) => {
         }
         const bones = skinnedMeshRef.current.skeleton.bones;
 
-        bones[2].rotation.y = degToRad(20);
     });
 
 
