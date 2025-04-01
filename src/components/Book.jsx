@@ -1,21 +1,20 @@
 import { useCursor, useTexture } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
 import { useAtom } from "jotai";
 import { easing } from "maath";
 import {  useEffect, useMemo, useRef, useState } from "react";
 import {
-  Bone,
-  BoxGeometry,
-  Color,
-  Float32BufferAttribute,
-
-  MeshStandardMaterial,
-  Skeleton,
-  SkinnedMesh,
-  Uint16BufferAttribute,
-  Vector3,
-  SkeletonHelper
-} from "three";
+    Bone,
+    BoxGeometry,
+    Color,
+    Float32BufferAttribute,
+    MathUtils,
+    MeshStandardMaterial,
+    Skeleton,
+    SkinnedMesh,
+    SRGBColorSpace,
+    Uint16BufferAttribute,
+    Vector3,
+  } from "three";
 
 import { degToRad } from "three/src/math/MathUtils.js";
 import { useFrame } from "@react-three/fiber";
@@ -71,7 +70,7 @@ pageGeometry.setAttribute(
     
 
 const whiteColor = new Color("white");
-// const emissiveColor = new Color("orange");
+const emissiveColor = new Color("orange");
 
 
 const pageMaterials = [
@@ -100,7 +99,7 @@ const Page = ({number, front, back, ...props}) => {
           ? [`/textures/book-cover-roughness.jpg`]
           : []),
       ]);
-    
+      picture.colorSpace = picture2.colorSpace = SRGBColorSpace;
 
     const group = useRef();
     const skinnedMeshRef = useRef();
