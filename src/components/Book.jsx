@@ -13,7 +13,12 @@ import {
   Vector3,
   SkeletonHelper
 } from "three";
+
+import { degToRad } from "three/src/math/MathUtils.js";
+import { useFrame } from "@react-three/fiber";
+
 import { useHelper } from '@react-three/drei';
+
 
 import { pages } from "./UI";
 
@@ -21,7 +26,7 @@ import { pages } from "./UI";
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.71; // 4:3 aspect ratio
 const PAGE_DEPTH = 0.003;
-const PAGE_SEGMENTS = 30;
+const PAGE_SEGMENTS = 5;
 const SEGMENT_WIDTH = PAGE_WIDTH / PAGE_SEGMENTS;
 
 const pageGeometry = new BoxGeometry(
@@ -125,6 +130,17 @@ const Page = ({number, front, back, ...props}) => {
   
     // Add SkeletonHelper to visualize bones
     useHelper(skinnedMeshRef, SkeletonHelper, "red");
+
+    useFrame(() => {
+        if (!skinnedMeshRef.current) {
+          return;
+        }
+        const bones = skinnedMeshRef.current.skeleton.bones;
+
+        bones[2].rotation.y = degToRad(20);
+    });
+
+
   
     return (
       <group {...props} ref={group}>
