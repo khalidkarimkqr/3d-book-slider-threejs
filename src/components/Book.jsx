@@ -68,10 +68,13 @@ const Page = ({number, front, back, ...props}) => {
     const skeleton = new Skeleton(bones);
     const materials = pageMaterials;
     const mesh = new SkinnedMesh(pageGeometry, materials);
-    
 
-
-
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    mesh.frustumCulled = false;
+    mesh.add(skeleton.bones[0]);
+    mesh.bind(skeleton);
+    return mesh;
   }, []);
 
 
