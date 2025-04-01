@@ -14,8 +14,6 @@ const Page = ({number, front, back, ...props}) => {
   )
 }
 
-
-
 export const Book = ({ ...props }) => {
   return (
     <group {...props}>
