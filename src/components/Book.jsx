@@ -7,7 +7,7 @@ const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.71; // 4:3 aspect ratio
 const PAGE_DEPTH = 0.003;
 const PAGE_SEGMENTS = 30;
-const SEGMENT_WIDTH = PAGE_WIDTH / PAGE_SEGMENTS
+const SEGMENT_WIDTH = PAGE_WIDTH / PAGE_SEGMENTS;
 
 const pageGeometry = new BoxGeometry(
     PAGE_WIDTH,
@@ -17,12 +17,21 @@ const pageGeometry = new BoxGeometry(
     2
 );
 
+
+pageGeometry.translate(PAGE_WIDTH/ 2, 0, 0);
+const position = pageGeometry.attributes.position;
+const vertex = new Vector3();
+const skinIndexes = [];
+const skinWeights = [];
+
+
+
 const Page = ({number, front, back, ...props}) => {
   const group = useRef();
   return (
     <group {...props} ref ={group}>
-      <mesh scale = {0.1}>
-        <boxGeometry />
+      <mesh scale = {0.5}>
+        <primitive object = {pageGeometry} attach = {"geometry"} />
         <meshBasicMaterial color= "red"/>
       </mesh>
 
