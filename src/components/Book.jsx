@@ -1,6 +1,6 @@
 import {pages} from "./UI";
 import {useRef} from "react";
-import { BoxGeometry } from "three";
+import { BoxGeometry, SkinnedMesh } from "three";
 
 
 const PAGE_WIDTH = 1.28;
@@ -66,6 +66,10 @@ const Page = ({number, front, back, ...props}) => {
       }
     }
     const skeleton = new Skeleton(bones);
+    const materials = pageMaterials;
+    const mesh = new SkinnedMesh(pageGeometry, materials);
+    
+
 
 
   }, []);
