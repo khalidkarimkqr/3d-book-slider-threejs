@@ -1,6 +1,23 @@
-import {pages} from "./UI";
-import {useRef} from "react";
-import { BoxGeometry, SkinnedMesh } from "three";
+import { useCursor, useTexture } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useAtom } from "jotai";
+import { easing } from "maath";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  Bone,
+  BoxGeometry,
+  Color,
+  Float32BufferAttribute,
+  MathUtils,
+  MeshStandardMaterial,
+  Skeleton,
+  SkinnedMesh,
+  SRGBColorSpace,
+  Uint16BufferAttribute,
+  Vector3,
+} from "three";
+import { degToRad } from "three/src/math/MathUtils.js";
+import { pageAtom, pages } from "./UI";
 
 
 const PAGE_WIDTH = 1.28;
@@ -50,6 +67,8 @@ for (let i = 0; i < position.count; i++) {
 
 const Page = ({number, front, back, ...props}) => {
   const group = useRef();
+
+  const SkinnedMesh = useRef();
 
   const manualSkinnedMesh = useMemo(() => {
     const bones = [];
