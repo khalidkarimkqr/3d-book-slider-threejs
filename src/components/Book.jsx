@@ -36,6 +36,11 @@ for (let i = 0; i < position.count; i++) {
     skinWeights.push(1 - skinWeight, skinWeight, 0, 0); // set the skin weights
   }
 
+  pageGeometry.setAttribute(
+    "skinIndex",
+    new Uint16BufferAttribute(skinIndexes, 4)
+  );
+
 
 
 const Page = ({number, front, back, ...props}) => {
