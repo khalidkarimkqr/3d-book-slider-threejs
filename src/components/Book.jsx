@@ -1,1 +1,1 @@
-export const Book = () => {};
+export const Book = ({ ...props }) => {};
