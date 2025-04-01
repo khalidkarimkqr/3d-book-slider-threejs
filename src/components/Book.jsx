@@ -1,5 +1,6 @@
 import {pages} from "./UI";
 import {useRef} from "react";
+import { BoxGeometry } from "three";
 
 
 const PAGE_WIDTH = 1.28;
@@ -8,6 +9,12 @@ const PAGE_DEPTH = 0.003;
 const PAGE_SEGMENTS = 30;
 const SEGMENT_WIDTH = PAGE_WIDTH / PAGE_SEGMENTS
 
+const pageGeometry = new BoxGeometry(
+    PAGE_WIDTH,
+    PAGE_HEIGHT,
+    PAGE_DEPTH,
+    PAGE_SEGMENTS
+);
 
 const Page = ({number, front, back, ...props}) => {
   const group = useRef();
