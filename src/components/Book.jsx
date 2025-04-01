@@ -55,7 +55,18 @@ const Page = ({number, front, back, ...props}) => {
     const bones = [];
     for (let i = 0; i <= PAGE_SEGMENTS; i++) {
       let bone = new Bone();
+      bones.push(bone);
+      if (i === 0) {
+        bone.position.x = 0;
+      } else {
+        bone.position.x = SEGMENT_WIDTH;
+      }
+      if (i > 0) {
+        bones[i - 1].add(bone); // attach the new bone to the previous bone
+      }
     }
+
+
   }, []);
 
 
