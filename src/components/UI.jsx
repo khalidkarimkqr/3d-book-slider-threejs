@@ -1,4 +1,5 @@
 import { atom, useAtom } from "jotai";
+// import { useEffect } from "react";
 
 const pictures = [
   "DSC00680",

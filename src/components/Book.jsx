@@ -1,23 +1,19 @@
-import { useCursor, useTexture } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useAtom } from "jotai";
-import { easing } from "maath";
-import { useEffect, useMemo, useRef, useState } from "react";
+
+import { useMemo, useRef, } from "react";
 import {
   Bone,
   BoxGeometry,
   Color,
   Float32BufferAttribute,
-  MathUtils,
+
   MeshStandardMaterial,
   Skeleton,
   SkinnedMesh,
-  SRGBColorSpace,
   Uint16BufferAttribute,
   Vector3,
 } from "three";
-import { degToRad } from "three/src/math/MathUtils.js";
-import { pageAtom, pages } from "./UI";
+
+import { pages } from "./UI";
 
 
 const PAGE_WIDTH = 1.28;
@@ -53,39 +49,50 @@ for (let i = 0; i < position.count; i++) {
     skinWeights.push(1 - skinWeight, skinWeight, 0, 0); // set the skin weights
   }
 
-  pageGeometry.setAttribute(
+pageGeometry.setAttribute(
     "skinIndex",
     new Uint16BufferAttribute(skinIndexes, 4)
-  );
+);
 
-  pageGeometry.setAttribute(
+pageGeometry.setAttribute(
     "skinWeight",
     new Float32BufferAttribute(skinWeights, 4)
-  );
+);
+    
 
-  const pageMaterials = [
+const whiteColor = new Color("white");
+// const emissiveColor = new Color("orange");
+
+
+const pageMaterials = [
     new MeshStandardMaterial({
-      color: whiteColor,
+        color: whiteColor,
     }),
     new MeshStandardMaterial({
-      color: "#111",
+        color: "#111",
     }),
     new MeshStandardMaterial({
-      color: whiteColor,
+        color: whiteColor,
     }),
     new MeshStandardMaterial({
-      color: whiteColor,
+        color: whiteColor,
     }),
-  ];
+    new MeshStandardMaterial({
+        color: "pink",
+    }),
+    new MeshStandardMaterial({
+        color: "blue",
+    }),
+];
 
 
 
 const Page = ({number, front, back, ...props}) => {
   const group = useRef();
 
-  const SkinnedMesh = useRef();
+  const skinnedMeshRef = useRef();
 
-  const manualSkinnedMesh = useMemo(() => {
+  const { mesh, bones } = useMemo(() => {
     const bones = [];
     for (let i = 0; i <= PAGE_SEGMENTS; i++) {
       let bone = new Bone();
@@ -96,30 +103,26 @@ const Page = ({number, front, back, ...props}) => {
         bone.position.x = SEGMENT_WIDTH;
       }
       if (i > 0) {
-        bones[i - 1].add(bone); // attach the new bone to the previous bone
+        bones[i - 1].add(bone);
       }
     }
     const skeleton = new Skeleton(bones);
-    const materials = pageMaterials;
-    const mesh = new SkinnedMesh(pageGeometry, materials);
+    // const materials = pageMaterials;
+    const mesh = new SkinnedMesh(pageGeometry, pageMaterials);
 
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     mesh.frustumCulled = false;
     mesh.add(skeleton.bones[0]);
     mesh.bind(skeleton);
-    return mesh;
+    return {mesh, bones};
   }, []);
 
 
 
   return (
     <group {...props} ref ={group}>
-      <mesh scale = {0.5}>
-        <primitive object = {pageGeometry} attach = {"geometry"} />
-        <meshBasicMaterial color= "red"/>
-      </mesh>
-
+        <primitive object = {mesh} />
     </group>
   );
 };
