@@ -170,8 +170,6 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
       mesh.add(bones[0]); // Changed from skeleton.bones[0] to bones[0]
       mesh.bind(skeleton);
       
-      // Store skeleton reference on the mesh for the helper
-      mesh.userData.skeleton = skeleton;
       
       return mesh;
     }, []);
@@ -183,6 +181,8 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
         if (!skinnedMeshRef.current) {
           return;
         }
+        const emissiveIntensity = highlighted ? 0.22 : 0;
+
         if (lastOpened.current !== opened) {
             turnedAt.current = +new Date();
             lastOpened.current = opened;
