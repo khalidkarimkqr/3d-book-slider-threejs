@@ -125,6 +125,19 @@ const Page = ({number, front, back, ...props}) => {
           emissive: emissiveColor,
           emissiveIntensity: 0,
         }),
+        new MeshStandardMaterial({
+          color: whiteColor,
+          map: picture2,
+          ...(number === pages.length - 1
+            ? {
+                roughnessMap: pictureRoughness,
+              }
+            : {
+                roughness: 0.1,
+              }),
+          emissive: emissiveColor,
+          emissiveIntensity: 0,
+        }),
       ];
       const mesh = new SkinnedMesh(pageGeometry, materials);
   
