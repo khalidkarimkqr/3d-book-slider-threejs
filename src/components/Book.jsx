@@ -175,6 +175,7 @@ const Page = ({number, front, back,page, opened, ...props}) => {
           return;
         }
         let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
+        targetRotation += degToRad(number * 0.8);
         const bones = skinnedMeshRef.current.skeleton.bones;
         bones[0].rotation.y = targetRotation;
 
