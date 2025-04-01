@@ -22,6 +22,8 @@ import { useHelper } from '@react-three/drei';
 import { pageAtom, pages } from "./UI";
 
 
+const lerpFactor = 0.05;
+
 const PAGE_WIDTH = 1.28;
 const PAGE_HEIGHT = 1.71; // 4:3 aspect ratio
 const PAGE_DEPTH = 0.003;
@@ -179,7 +181,7 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
             targetRotation += degToRad(number * 0.8);
           }
         const bones = skinnedMeshRef.current.skeleton.bones;
-        bones[0].rotation.y = targetRotation;
+        bones[0].rotation.y = MathUtils.lerp(bones[0].rotation.y,targetRotation, lerpFactor)
 
     });
 
