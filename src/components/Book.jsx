@@ -233,14 +233,35 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
         }
     });
 
-
+    const [_, setPage] = useAtom(pageAtom);
+    const [highlighted, setHighlighted] = useState(false);
+    useCursor(highlighted);
   
     return (
-      <group {...props} ref={group}>
-        <primitive object={manualSkinnedMesh} ref={skinnedMeshRef} 
-        position-z={-number * PAGE_DEPTH + page * PAGE_DEPTH}/>
-      </group>
-    );
+        <group
+          {...props}
+          ref={group}
+          onPointerEnter={(e) => {
+            e.stopPropagation();
+            setHighlighted(true);
+          }}
+          onPointerLeave={(e) => {
+            e.stopPropagation();
+            setHighlighted(false);
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            setPage(opened ? number : number + 1);
+            setHighlighted(false);
+          }}
+        >
+          <primitive
+            object={manualSkinnedMesh}
+            ref={skinnedMeshRef}
+            position-z={-number * PAGE_DEPTH + page * PAGE_DEPTH}
+          />
+        </group>
+      );
 };
 
   
