@@ -107,10 +107,12 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
           ? [`/textures/book-cover-roughness.jpg`]
           : []),
       ]);
-      picture.colorSpace = picture2.colorSpace = SRGBColorSpace;
+      
+    picture.colorSpace = picture2.colorSpace = SRGBColorSpace;
 
     const group = useRef();
     const turnedAt = useRef(0);
+    const lastOpened = useRef(opened);
     const skinnedMeshRef = useRef();
   
     const manualSkinnedMesh = useMemo(() => {
@@ -180,6 +182,10 @@ const Page = ({number, front, back,page, opened,bookClosed, ...props}) => {
         if (!skinnedMeshRef.current) {
           return;
         }
+        if (lastOpened.current !== opened) {
+            turnedAt.current = +new Date();
+            lastOpened.current = opened;
+          }
         let turningTime = Math.min(400, new Date() - turnedAt.current) / 400;
         turningTime = Math.sin(turningTime * Math.PI);
 
