@@ -11,17 +11,16 @@ const Page = ({number, front, back, ...props}) => {
       </mesh>
 
     </group>
-  )
-}
+  );
+};
 
 export const Book = ({ ...props }) => {
   return (
     <group {...props}>
       {[...pages].map((pageData, index) => (
-        <Page
-        position-x={index * 0.1} key={index} number={index} {...pageData} />
+        <Page position-z={index * 0.15} key={index} number={index} {...pageData} />
       ))}
     </group>
-  )
+  );
 };
 
