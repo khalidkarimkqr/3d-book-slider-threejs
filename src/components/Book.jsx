@@ -50,6 +50,16 @@ for (let i = 0; i < position.count; i++) {
 
 const Page = ({number, front, back, ...props}) => {
   const group = useRef();
+
+  const manualSkinnedMesh = useMemo(() => {
+    const bones = [];
+    for (let i = 0; i <= PAGE_SEGMENTS; i++) {
+      let bone = new Bone();
+    }
+  }, []);
+
+
+
   return (
     <group {...props} ref ={group}>
       <mesh scale = {0.5}>
