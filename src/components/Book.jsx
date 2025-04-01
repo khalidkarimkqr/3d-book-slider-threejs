@@ -89,6 +89,12 @@ const pageMaterials = [
     
 ];
 
+pages.forEach((page) => {
+    useTexture.preload(`/textures/${page.front}.jpg`);
+    useTexture.preload(`/textures/${page.back}.jpg`);
+    useTexture.preload(`/textures/book-cover-roughness.jpg`);
+});
+
 
 
 const Page = ({number, front, back, ...props}) => {
@@ -189,14 +195,13 @@ export const Book = ({ ...props }) => {
     return (
       <group {...props}>
         {[...pages].map((pageData, index) => 
-          index === 0 ? (
+          
             <Page 
               position-x={index * 0.15} 
               key={index} 
               number={index} 
               {...pageData} 
             />
-          ) : null
         )}
       </group>
     );
