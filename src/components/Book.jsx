@@ -11,7 +11,9 @@ import {
   SkinnedMesh,
   Uint16BufferAttribute,
   Vector3,
+  SkeletonHelper
 } from "three";
+import { useHelper } from '@react-three/drei';
 
 import { pages } from "./UI";
 
@@ -88,45 +90,50 @@ const pageMaterials = [
 
 
 const Page = ({number, front, back, ...props}) => {
-  const group = useRef();
-
-  const skinnedMeshRef = useRef();
-
-  const { mesh, bones } = useMemo(() => {
-    const bones = [];
-    for (let i = 0; i <= PAGE_SEGMENTS; i++) {
-      let bone = new Bone();
-      bones.push(bone);
-      if (i === 0) {
-        bone.position.x = 0;
-      } else {
-        bone.position.x = SEGMENT_WIDTH;
+    const group = useRef();
+    const skinnedMeshRef = useRef();
+  
+    const manualSkinnedMesh = useMemo(() => {
+      const bones = [];
+      for (let i = 0; i <= PAGE_SEGMENTS; i++) {
+        let bone = new Bone();
+        bones.push(bone);
+        if (i === 0) {
+          bone.position.x = 0;
+        } else {
+          bone.position.x = SEGMENT_WIDTH;
+        }
+        if (i > 0) {
+          bones[i - 1].add(bone);
+        }
       }
-      if (i > 0) {
-        bones[i - 1].add(bone);
-      }
-    }
-    const skeleton = new Skeleton(bones);
-    // const materials = pageMaterials;
-    const mesh = new SkinnedMesh(pageGeometry, pageMaterials);
-
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-    mesh.frustumCulled = false;
-    mesh.add(skeleton.bones[0]);
-    mesh.bind(skeleton);
-    return {mesh, bones};
-  }, []);
-
-
-
-  return (
-    <group {...props} ref ={group}>
-        <primitive object = {mesh} />
-    </group>
-  );
+      const skeleton = new Skeleton(bones);
+      const materials = pageMaterials
+      const mesh = new SkinnedMesh(pageGeometry, materials);
+  
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      mesh.frustumCulled = false;
+      mesh.add(bones[0]); // Changed from skeleton.bones[0] to bones[0]
+      mesh.bind(skeleton);
+      
+      // Store skeleton reference on the mesh for the helper
+      mesh.userData.skeleton = skeleton;
+      
+      return mesh;
+    }, []);
+  
+    // Add SkeletonHelper to visualize bones
+    useHelper(skinnedMeshRef, SkeletonHelper, "red");
+  
+    return (
+      <group {...props} ref={group}>
+        <primitive object={manualSkinnedMesh} ref={skinnedMeshRef} />
+      </group>
+    );
 };
 
+  
 export const Book = ({ ...props }) => {
     return (
       <group {...props}>
