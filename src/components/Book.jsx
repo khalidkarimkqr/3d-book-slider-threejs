@@ -18,7 +18,8 @@ export const Book = ({ ...props }) => {
   return (
     <group {...props}>
       {[...pages].map((pageData, index) => (
-        <Page key={index} number={index} {...pageData} />
+        <Page
+        position-x={index * 0.1} key={index} number={index} {...pageData} />
       ))}
     </group>
   )
