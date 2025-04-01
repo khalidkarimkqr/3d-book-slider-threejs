@@ -176,6 +176,7 @@ const Page = ({number, front, back,page, opened, ...props}) => {
         }
         let targetRotation = opened ? -Math.PI / 2 : Math.PI / 2;
         const bones = skinnedMeshRef.current.skeleton.bones;
+        bones[0].rotation.y = targetRotation;
 
     });
 
@@ -193,7 +194,7 @@ const Page = ({number, front, back,page, opened, ...props}) => {
 export const Book = ({ ...props }) => {
     const [page] = useAtom(pageAtom);
     return (
-      <group {...props}>
+      <group {...props} rotation-y={-Math.PI / 2}>
         {[...pages].map((pageData, index) => 
           
             <Page 
