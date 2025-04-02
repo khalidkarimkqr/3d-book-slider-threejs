@@ -14,9 +14,8 @@
 </div>
 
 
-
 ![Screenshot](public/images/yee321.png)
-![Screenshot](public/images/yee12.png)
+![Screenshot](public/images/yeee12.png)
 
 <div align="center">
   <img src="public/gifs/chrome_6hbW8Rm1vA.gif" width="70%" alt="3D Book Slider Demo" />
