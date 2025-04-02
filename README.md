@@ -15,7 +15,13 @@
 
 
 
-![Screenshot](https://github.com/user-attachments/assets/c6b6ea2e-2643-4d53-89b7-ee5b848de06d)
+![Screenshot](public/images/yee321.png)
+![Screenshot](public/images/yee12.png)
+
+<div align="center">
+  <img src="public/gifs/chrome_6hbW8Rm1vA.gif" width="70%" alt="3D Book Slider Demo" />
+</div>
+
 
 
 ## ✨ Features
