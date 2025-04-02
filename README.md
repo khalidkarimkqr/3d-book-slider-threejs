@@ -19,7 +19,8 @@
 </div>
 
 <div align="center">
-  <img src="public/gifs/3d_book.gif" width="70%" alt="3D Book Slider Demo" />
+  <img src="public/gifs/optimized.gif" width="70%" loading="lazy" alt="Demo" />
+  <p><em>Loading interactive book preview...</em></p>
 </div>
 
 
