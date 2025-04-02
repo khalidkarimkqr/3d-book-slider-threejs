@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📘 3D Interactive Book Portfolio 📘
+# 📘 3D Book Slider three.js 📘
 
 ### A stunning 3D book experience built with React Three Fiber
 
@@ -11,20 +11,34 @@
 ![](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
 ![](https://img.shields.io/badge/Jotai-000000?style=for-the-badge)
 
-[![wakatime](https://wakatime.com/badge/user/your-user-id/project/your-project-id.svg)](https://wakatime.com/badge/user/your-user-id/project/your-project-id)
-
 </div>
 
-![Demo GIF](./public/demo.gif)
+## 🎥 Demo Preview
 
-## 🚀 Features
+<div align="center">
+  <img src="public/demo.gif" width="70%" alt="3D Book Slider Demo" />
+</div>
 
-- **Realistic 3D Book** - Physics-based page turning animations
-- **Interactive UI** - Intuitive navigation controls
-- **Audio Feedback** - Page flip sound effects
-- **Customizable Content** - Easy to add your own images
-- **Responsive Design** - Works on various screen sizes
-- **Performance Optimized** - Smooth animations even on modest hardware
+
+## ✨ Features
+
+- 📖 Realistic 3D page turning with physics
+- 🖱️ Interactive navigation controls
+- 🔊 Immersive page-flip sound effects
+- 🎨 Customizable content (images, textures)
+- ⚡ 60fps smooth animations
+- 📱 Responsive design
+
+## 🛠 Tech Stack
+
+| Component       | Technology                     |
+|-----------------|--------------------------------|
+| Framework       | React, Vite                    |
+| 3D Engine       | Three.js + React Three Fiber   |
+| Physics         | Custom vertex shaders          |
+| State Management| Jotai                          |
+| Styling         | Tailwind CSS                   |
+| Audio           | Web Audio API                  |
 
 ## 🎮 How to Use
 
@@ -34,21 +48,73 @@
 - The book will smoothly animate to your selected page
 
 ### Adding Your Content
-1. Replace images in `public/textures/` with your own
-2. Update the `pictures` array in `UI.jsx` with your filenames
-3. Customize the book appearance by editing parameters in `Book.jsx`
-
-## 🛠️ Configuration
-
-In `Book.jsx`, you can adjust these parameters:
-
+- Replace images in `public/textures/` with your own
+- Update the `pictures` array in `UI.jsx` with your filenames
+- Customize the book appearance by editing parameters in `Book.jsx`
+  
+### In Book.jsx, you can adjust these parameters:
 ```javascript
-// Physical properties
-const PAGE_WIDTH = 1.28;          // Book width
-const PAGE_HEIGHT = 1.71;         // Book height
-const PAGE_DEPTH = 0.003;         // Page thickness
+  // Physical properties
+  const PAGE_WIDTH = 1.28;          // Book width
+  const PAGE_HEIGHT = 1.71;         // Book height
+  const PAGE_DEPTH = 0.003;         // Page thickness
+  
+  // Animation properties
+  const PAGE_SEGMENTS = 30;         // Page detail level
+  const easingFactor = 0.5;         // Page turning speed
+  const insideCurveStrength = 0.18; // Page bending intensity
+```
 
-// Animation properties
-const PAGE_SEGMENTS = 30;         // Page detail level
-const easingFactor = 0.5;         // Page turning speed
-const insideCurveStrength = 0.18; // Page bending intensity
+## 🖥 Local Setup
+
+### Prerequisites
+
+- Node.js ≥16.x
+- Modern browser with WebGL 2.0 support
+- GPU with hardware acceleration
+
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/3d-book-slider.git
+   cd 3d-book-slider
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+3. **Start the development server**
+  ```bash
+   npm run dev
+```
+4. **Open your browser to**
+   ```bash
+   http://localhost:5173
+   ```
+
+
+## 🤝 Contributing
+
+We welcome contributions from the community! To contribute to this project:
+
+```bash
+# 1. Fork the repository
+# (Click the 'Fork' button at the top-right of the GitHub repository)
+
+# 2. Clone your forked repository
+git clone https://github.com/YOUR-USERNAME/3d-book-slider.git
+cd 3d-book-slider
+
+# 3. Create a new feature branch
+git checkout -b feature/your-feature-name
+
+# 4. Make your changes and commit them
+git add .
+git commit -m "feat: add your amazing feature"
+
+# 5. Push to your branch
+git push origin feature/your-feature-name
+```
