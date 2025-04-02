@@ -20,7 +20,7 @@
 
 <div align="center">
   <video autoplay loop muted playsinline width="70%">
-    <source src="public/videos/3d_book.mp4" type="video/mp4">
+    <source src="public/gifs/3d_book.mp4" type="video/mp4">
     Your browser doesn't support HTML5 video.
   </video>
 </div>
