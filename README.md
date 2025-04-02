@@ -4,6 +4,8 @@
 
 ### A stunning 3D book experience built with React Three Fiber
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://your-demo-url.vercel.app)
+
 ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)
 ![](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
@@ -18,10 +20,7 @@
   <img src="public/images/yeee12.png" width="49%" /> 
 </div>
 
-<div align="center">
-  <img src="public/gifs/optimized.gif" width="70%" loading="lazy" alt="Demo" />
-  <p><em>Loading interactive book preview...</em></p>
-</div>
+
 
 
 
