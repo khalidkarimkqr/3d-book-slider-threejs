@@ -4,7 +4,6 @@
 
 ### A stunning 3D book experience built with React Three Fiber
 
-**Live Demo:** https://your-demo-url.vercel.app
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://your-demo-url.vercel.app)
 
@@ -22,7 +21,13 @@
   <img src="public/images/yeee12.png" width="49%" /> 
 </div>
 
+<div align="center">
+  <img src="public/gifs/3d_book.gif" width="70%" alt="Demo walkthrough" />
+</div>
 
+## 💻 Live Demo
+
+[d-book-slider-threejs.vercel.app](https://3d-book-slider-threejs.vercel.app/)\_
 
 
 
