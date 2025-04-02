@@ -13,9 +13,10 @@
 
 </div>
 
-
-![Screenshot](public/images/yee321.png)
-![Screenshot](public/images/yeee12.png)
+<div align="center">
+  <img src="public/images/yee321.png" width="49%" />
+  <img src="public/images/yeee12.png" width="49%" /> 
+</div>
 
 <div align="center">
   <img src="public/gifs/chrome_6hbW8Rm1vA.gif" width="70%" alt="3D Book Slider Demo" />
