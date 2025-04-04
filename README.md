@@ -2,8 +2,7 @@
 
 # 📘 3D Book Slider three.js 📘
 
-### A stunning 3D book experience built with React Three Fiber component
-
+### A stunning 3D book experience built with React Three Fiber
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://your-demo-url.vercel.app)
 
