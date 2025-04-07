@@ -100,7 +100,7 @@
   ```bash
    npm run dev
 ```
-4. **Open your browser to**
+4. **Open your browser**
    ```bash
    http://localhost:5173
    ```
